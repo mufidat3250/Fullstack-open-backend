@@ -1,5 +1,5 @@
-require('dotenv').config()
-const mongoose = require('mongoose')
+const process = require("dotenv").config()
+const mongoose = require("mongoose")
 
 // const {argv} = require('process')
 // if(process.argv.length < 3){
@@ -8,14 +8,14 @@ const mongoose = require('mongoose')
 // }
 
 // const password = argv[2]
-const url = `mongodb+srv://mufidah:iyanu3250@cluster0.be3ep0l.mongodb.net/phonebookApp?retryWrites=true&w=majority&appName=Cluster0`
 
+const url = process.env.MONGODB_URI
 mongoose.connect(url)
 
-mongoose.set('strictQuery', false)
+mongoose.set("strictQuery", false)
 const phonebookSchema = new mongoose.Schema({
-  name: String,
-  number: String
+    name: String,
+    number: String
 })
 
 // phonebookSchema.set('toJSON', {
@@ -26,15 +26,15 @@ const phonebookSchema = new mongoose.Schema({
 //   }
 // })
 
-phonebookSchema.set('toJSON', {
-  transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
-    delete returnedObject._id
-    delete returnedObject.__v
-  }
+phonebookSchema.set("toJSON", {
+    transform: (document, returnedObject) => {
+        returnedObject.id = returnedObject._id.toString()
+        delete returnedObject._id
+        delete returnedObject.__v
+    }
 })
 
-const Phonebook = mongoose.model('Person', phonebookSchema)
+const Phonebook = mongoose.model("Person", phonebookSchema)
 
 // const phonebook = new Phonebook({
 //   name: argv[3],
@@ -47,9 +47,8 @@ const Phonebook = mongoose.model('Person', phonebookSchema)
 // })
 
 
-Phonebook.find({}).then((person)=> {
-  console.log(person)
-  mongoose.connection.close()
+Phonebook.find({}).then(() => {
+    mongoose.connection.close()
 })
 
 

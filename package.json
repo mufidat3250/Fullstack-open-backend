@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "node": "^21.6.2"
   },
   "devDependencies": {
+    "@stylistic/eslint-plugin-js": "^1.6.3",
     "nodemon": "^3.1.0 --inspect index.js"
   }
 }

@@ -1,9 +1,9 @@
-require('dotenv').config()
-const mongoose = require('mongoose')
+const process= require("dotenv").config()
+const mongoose = require("mongoose")
 
 const url = process.env.MONGODB_URI
 mongoose.connect(url)
-mongoose.set('strictQuery', false)
+mongoose.set("strictQuery", false)
 const personSchema = new mongoose.Schema({
     name:{
         type: String,
@@ -16,13 +16,13 @@ const personSchema = new mongoose.Schema({
         required:true,
         validate: {
             validator: function(v) {
-              return /^\d{2,3}-\d{4,10}$/.test(v);
+                return /^\d{2,3}-\d{4,10}$/.test(v)
             },
         }
     }
 })
 
-personSchema.set('toJSON', {
+personSchema.set("toJSON", {
     transform: (document, returedObject) => {
         returedObject.id = returedObject._id.toString()
         delete returedObject._id
@@ -30,7 +30,7 @@ personSchema.set('toJSON', {
     }
 })
 
-const Persons = mongoose.model('Person', personSchema)
+const Persons = mongoose.model("Person", personSchema)
 
 module.exports = Persons
 
