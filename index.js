@@ -27,6 +27,10 @@ const errorHandler = (error, request, response, next) => {
     response.status("400").send({
       error: "Malformed Id",
     });
+  }else if(error.name === 'ValidationError'){
+    response.status("400").send({
+      error: error.message
+    })
   }
   next(error);
 };
@@ -133,7 +137,7 @@ app.put("/api/persons/:id", (request, response, next) => {
     name: body.name,
     number: body.number,
   };
-  Persons.findByIdAndUpdate(request.params.id, person, { new: true })
+  Persons.findByIdAndUpdate(request.params.id, person, { new: true, runValidators:true, context:'quary'})
     .then((updatePerson) => {
       response.json(updatePerson);
     })

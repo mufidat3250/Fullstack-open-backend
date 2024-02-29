@@ -5,8 +5,21 @@ const url = process.env.MONGODB_URI
 mongoose.connect(url)
 mongoose.set('strictQuery', false)
 const personSchema = new mongoose.Schema({
-    name:String,
-    number:String
+    name:{
+        type: String,
+        required:true,
+        minLength: 3
+    },
+    number:{
+        type:String,
+        minLength:8,
+        required:true,
+        validate: {
+            validator: function(v) {
+              return /^\d{2,3}-\d{4,10}$/.test(v);
+            },
+        }
+    }
 })
 
 personSchema.set('toJSON', {
