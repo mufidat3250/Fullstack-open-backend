@@ -43,13 +43,15 @@ app.use(requestLogger());
 // };
 
 const date = new Date();
-app.get("/info", (request, response) => {
+app.get("/info", (request, response, next) => {
   const currentDate = new Date().toLocaleString();
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  response.send(`<div>
+  Persons.find({}).then((persons)=> {
+    response.send(`<div>
     <p>Phonebooss has info for ${persons.length}</p>
     <p>${currentDate} ${timeZone}</p>
     </div>`);
+  }).catch((error)=> next(error))
 });
 
 app.get("/api/persons", (request, response, next) => {
