@@ -103,7 +103,6 @@ app.post("/api/persons", (request, response, next) => {
   person
     .save()
     .then((savedNote) => {
-      console.log(savedNote);
       response.json(savedNote);
     })
     .catch((error) => next(error));

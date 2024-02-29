@@ -2,8 +2,8 @@ POST http://localhost:3001/api/persons/
 Content-Type: application/json
 
 {
-   "name" : "Omiyale",
-   "number": "123-456-78"
+   "name" : "Omoda",
+   "number": "122223"
 }
 
 ###
@@ -11,6 +11,6 @@ PUT http://localhost:3001/api/persons/65df8e38b9ea71d091a077a9
 Content-Type: application/json
 
 {
-    "name": "olorunda",
+    "name": "olorun",
     "number": "908765"
 }
