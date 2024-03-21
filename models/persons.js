@@ -1,8 +1,15 @@
-const process= require("dotenv").config()
+const logger = require('../utils/logger') 
+require("dotenv").config()
 const mongoose = require("mongoose")
 
+
 const url = process.env.MONGODB_URI
-mongoose.connect(url)
+mongoose.connect(url).then(()=> {
+    logger.info('Connected to mongo DB')
+}).catch((error)=> {
+    logger.error('Error connecting to mongo dB', error.message)
+})
+
 mongoose.set("strictQuery", false)
 const personSchema = new mongoose.Schema({
     name:{
